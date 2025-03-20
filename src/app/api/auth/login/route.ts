@@ -59,8 +59,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         user: {
-          ...userData,
-          isAdmin: !!user.isAdmin
+          ...userData
         },
         message: 'Login successful' 
       },
