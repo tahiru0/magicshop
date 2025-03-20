@@ -1,0 +1,9 @@
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="75" cy="75" r="70" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M75 5L75 145" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M5 75L145 75" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M21.9669 21.9669L128.033 128.033" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M128.033 21.9669L21.9669 128.033" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M75 5L120 75L75 145L30 75L75 5Z" fill="#b429f9" fill-opacity="0.05" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M35 45L115 45L115 105L35 105L35 45Z" stroke="#b429f9" stroke-width="1" stroke-opacity="0.3" />
+</svg>

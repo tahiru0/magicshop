@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - Make sure isAdmin is defined correctly
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  name      String?
+  isAdmin   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  orders    Order[]
+  cart      UserCart?
+}
+
+// UserCart model for persistent cart storage
+model UserCart {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartItems Json     @default("[]") // Stores cart items as JSON
+  updatedAt DateTime @updatedAt
+}
+
+// Product model
+model Product {
+  id           String       @id @default(uuid())
+  name         String
+  price        Float
+  priceDisplay String
+  description  String
+  image        String?
+  category     String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  OrderItems   OrderItem[]
+  inventory    Int          @default(0)
+  featured     Boolean      @default(false)
+}
+
+// Order model
+model Order {
+  id        String      @id @default(uuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  status    OrderStatus @default(PENDING)
+  items     OrderItem[]
+  total     Float
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+// OrderItem model
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+// Enum for order status
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}

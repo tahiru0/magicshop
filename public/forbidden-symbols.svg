@@ -1,0 +1,34 @@
+<!-- filepath: d:\duancanhan\magicshop\public\forbidden-symbols.svg -->
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Circle with Symbols -->
+  <circle cx="250" cy="250" r="240" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  
+  <!-- Inner Circle -->
+  <circle cx="250" cy="250" r="180" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  
+  <!-- Pentagram -->
+  <path d="M250 10L310 190L500 190L345 300L405 480L250 370L95 480L155 300L0 190L190 190L250 10Z" 
+    stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" fill="#b429f9" fill-opacity="0.05" />
+  
+  <!-- Cross Lines -->
+  <path d="M250 10L250 490" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M10 250L490 250" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M70 70L430 430" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M430 70L70 430" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  
+  <!-- Symbols -->
+  <circle cx="250" cy="250" r="40" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <circle cx="250" cy="250" r="20" fill="#b429f9" fill-opacity="0.2" />
+  
+  <!-- Runic Symbols -->
+  <path d="M110 250L140 220L170 250L140 280L110 250Z" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M330 250L360 220L390 250L360 280L330 250Z" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M250 110L220 140L250 170L280 140L250 110Z" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  <path d="M250 330L220 360L250 390L280 360L250 330Z" stroke="#b429f9" stroke-width="1" stroke-opacity="0.4" />
+  
+  <!-- Additional Mystical Symbols -->
+  <circle cx="250" cy="130" r="10" fill="#b429f9" fill-opacity="0.2" />
+  <circle cx="250" cy="370" r="10" fill="#b429f9" fill-opacity="0.2" />
+  <circle cx="130" cy="250" r="10" fill="#b429f9" fill-opacity="0.2" />
+  <circle cx="370" cy="250" r="10" fill="#b429f9" fill-opacity="0.2" />
+</svg>
