@@ -1,13 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { useAuth } from './AuthContext';
 
 export interface Product {
   id: string;
   name: string;
   price: string;
-  numericPrice: number;
+  numericPrice: number; // This field is crucial for calculations
   image: string;
   category: string;
   description: string;
@@ -21,6 +21,7 @@ export interface CartItem {
 
 interface CartContextType {
   cart: CartItem[];
+  cartTotal: number;  // Added cartTotal property
   isOpen: boolean;
   addToCart: (product: Product) => void;
   removeFromCart: (id: string) => void;
@@ -28,7 +29,7 @@ interface CartContextType {
   clearCart: () => void;
   toggleCart: () => void;
   closeCart: () => void;
-  mergeWithServerCart: () => void;
+  mergeWithServerCart: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -37,6 +38,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
+  
+  // Fix the cartTotal calculation to properly parse numericPrice
+  const cartTotal = useMemo(() => {
+    return cart.reduce((total, item) => {
+      // Important: Make sure to properly access and parse the numericPrice
+      const price = typeof item.product.numericPrice === 'number' 
+        ? item.product.numericPrice 
+        : parseFloat(item.product.price) || 0;
+      
+      return total + (price * item.quantity);
+    }, 0);
+  }, [cart]);
 
   // Load cart from localStorage or user account on mount
   useEffect(() => {
@@ -150,6 +163,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <CartContext.Provider value={{
       cart,
+      cartTotal, // Make sure this is included
       isOpen,
       addToCart,
       removeFromCart,

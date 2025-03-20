@@ -4,23 +4,25 @@ import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 import LoginModal from './LoginModal';
 
 export default function Cart() {
-  const { cart, isOpen, closeCart, removeFromCart, updateQuantity, clearCart } = useCart();
+  // Make sure to extract cartTotal from the context
+  const { cart, isOpen, closeCart, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
   const { user, logout } = useAuth();
   const [checkoutStep, setCheckoutStep] = useState(0);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   
-  // Calculate total price
-  const totalPrice = cart.reduce((total, item) => {
-    return total + (item.product.numericPrice * item.quantity);
-  }, 0);
+  // Remove this redundant calculation since we're using the one from context
+  // const totalPrice = cart.reduce((total, item) => {
+  //   return total + (item.product.numericPrice * item.quantity);
+  // }, 0);
 
   const handleCheckout = () => {
     if (!user) {
       // Open login modal if user is not logged in
-      setIsLoginModalOpen(true);
+      setShowLoginModal(true);
       return;
     }
     
@@ -49,11 +51,13 @@ export default function Cart() {
 
   return (
     <>
+      {/* Cart Overlay */}
       <div 
         className={`cart-overlay ${isOpen ? 'open' : ''}`}
         onClick={closeCart}
       />
       
+      {/* Cart Content */}
       <div className={`cart-drawer ${isOpen ? 'open' : ''}`}>
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-pirata text-2xl text-magic-primary">
@@ -146,7 +150,8 @@ export default function Cart() {
                 <div className="mt-auto border-t border-magic-border pt-4">
                   <div className="flex justify-between mb-4">
                     <span className="font-cinzel">Total Arcane Value:</span>
-                    <span className="font-pirata text-magic-accent">{totalPrice.toFixed(2)} souls</span>
+                    {/* Display the cartTotal with proper formatting */}
+                    <span className="font-pirata text-magic-accent">{cartTotal.toFixed(0)} souls</span>
                   </div>
                   
                   {cart.length > 0 && (
@@ -266,7 +271,7 @@ export default function Cart() {
                 
                 <div className="flex justify-between">
                   <span className="font-cinzel">Total Arcane Value:</span>
-                  <span className="font-pirata text-magic-accent">{totalPrice.toFixed(2)} souls</span>
+                  <span className="font-pirata text-magic-accent">{cartTotal.toFixed(0)} souls</span>
                 </div>
               </div>
               
@@ -296,8 +301,8 @@ export default function Cart() {
 
       {/* Login Modal */}
       <LoginModal 
-        isOpen={isLoginModalOpen} 
-        onClose={() => setIsLoginModalOpen(false)} 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
       />
     </>
   );

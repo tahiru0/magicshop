@@ -1,26 +1,73 @@
-# Arcane Nexus Magic Shop
+# Arcane Nexus - Mystical E-Commerce Platform
 
-A mystical e-commerce platform for magical artifacts, grimoires, and potions.
+![Arcane Nexus](public/magic-emblem.svg)
 
-## Getting Started
+An immersive e-commerce experience for magical artifacts, grimoires, and potions. Built with Next.js, Prisma, and PostgreSQL.
+
+## ✨ Features
+
+- 🧙‍♂️ User authentication and authorization
+- 🔮 Product browsing and filtering by category
+- 🧪 Shopping cart functionality with persistent storage
+- 📜 Order processing and management
+- ⚡ Admin dashboard for managing products and orders
+- 🌙 Responsive, mystical dark theme UI
+
+## 🛠️ Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ 
-- PostgreSQL (or use the provided Neon DB connection)
+- PostgreSQL database (or use Neon DB as provided)
+- npm or yarn package manager
 
-### Setup
-1. Clone the repository
-2. Install dependencies:
+### Environment Variables
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Database Connection
+DATABASE_URL="postgresql://username:password@hostname:port/database?sslmode=require"
+
+# Authentication
+JWT_SECRET="your_jwt_secret_here"
+
+# Optional - Only needed for production
+NEXT_PUBLIC_API_URL="https://your-production-domain.com"
 ```
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/tahiru0/magicshop.git
+   cd magicshop
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Set up the database
+   ```bash
+   # Generate Prisma client
+   npx prisma generate
+   
+   # Initialize database (creates tables)
+   npx prisma migrate dev --name init
+   
+   # Seed the database with initial data
+   npx prisma db seed
+   ```
+
+   Alternatively, use the included batch script:
+   ```bash
+   # On Windows
+   setup-db.bat
+   ```
 
 First, run the development server:
 
