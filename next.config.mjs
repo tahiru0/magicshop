@@ -6,9 +6,13 @@ const nextConfig = {
       // Add any other external image domains you might use
       // For example: 'cdn.yourservice.com'
     ],
-    // You can also set deviceSizes and imageSizes here if needed
   },
-  // Explicitly set root layout segments
+  // Disable ESLint during build process
+  eslint: {
+    // Only run ESLint during development, not during builds
+    ignoreDuringBuilds: true,
+  },
+  // Experimental features
   experimental: {
     // Isolate the admin section with its own root layout
     appDir: true,

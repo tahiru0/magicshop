@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 interface OrderItem {
   productId: string;
@@ -67,22 +67,25 @@ export async function POST(request: NextRequest) {
     }
     
     // Tạo đơn hàng trong transaction
-    const order = await prisma.$transaction(async (tx: PrismaClient) => {
+    const order = await prisma.$transaction(async (tx) => {
       // Tạo đơn hàng
       const newOrder = await tx.order.create({
         data: {
           userId: data.userId,
           total: 0, // Sẽ cập nhật sau
           status: 'PENDING',
-          items: {
-            create: []
-          }
         }
       });
       
       // Tạo chi tiết đơn hàng và cập nhật tổng tiền
       for (const item of data.items) {
-        const product = products.find((p: { id: string }) => p.id === item.productId);
+        const product = products.find((p) => p.id === item.productId);
+        
+        if (!product) {
+          // Handle the case where product is not found
+          continue;
+        }
+        
         const price = product.price;
         total += price * item.quantity;
         

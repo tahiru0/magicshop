@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import UserMenu from './UserMenu';
 
 export default function NavBar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { cart, toggleCart } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -41,11 +42,12 @@ export default function NavBar() {
   const isActivePath = (path: string) => {
     if (path === '/shop') return pathname === '/shop';
     
-    // Handle category paths
+    // Handle category paths - fixed to work in SSR
     if (path.includes('?category=')) {
       const [basePath, categoryParam] = path.split('?');
       const category = categoryParam.split('=')[1];
-      return pathname === basePath && new URLSearchParams(window.location.search).get('category') === category;
+      const currentCategory = searchParams.get('category');
+      return pathname === basePath && currentCategory === category;
     }
     
     return pathname === path || pathname.startsWith(`${path}/`);

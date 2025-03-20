@@ -51,9 +51,9 @@ export default function ProductsPage() {
     setSelectedCategory(category);
     
     if (category) {
-      router.push(`/shop/products?category=${category}`);
+      router.push(`/products?category=${category}`);
     } else {
-      router.push('/shop/products');
+      router.push('/products');
     }
   };
 
@@ -100,7 +100,7 @@ export default function ProductsPage() {
             {filteredProducts.map((product) => (
               <div key={product.id} className="product-card">
                 <div className="product-image">
-                  <Link href={`/shop/product/${product.id}`}>
+                  <Link href={`/product/${product.id}`}>
                     <div className="w-full h-full relative">
                       <Image 
                         src={product.image || '/placeholder-product.jpg'}
@@ -117,7 +117,7 @@ export default function ProductsPage() {
                 </div>
                 
                 <div className="product-details">
-                  <Link href={`/shop/product/${product.id}`} className="product-title hover:text-magic-accent transition-colors">
+                  <Link href={`/product/${product.id}`} className="product-title hover:text-magic-accent transition-colors">
                     {product.name}
                   </Link>
                   <p className="text-sm line-clamp-2 mb-4 font-cinzel">{product.description.split('\n')[0]}</p>

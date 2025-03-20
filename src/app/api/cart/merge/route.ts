@@ -36,7 +36,11 @@ export async function POST(request: NextRequest) {
       select: { cartItems: true }
     });
     
-    const serverCart = serverCartData?.cartItems as CartItem[] || [];
+    // Parse server cart data - using as unknown as CartItem[] to handle type conversion
+    const serverCart = serverCartData?.cartItems 
+      ? (serverCartData.cartItems as unknown as CartItem[]) 
+      : [];
+      
     const mergedCart = [...serverCart];
     
     // Merge the carts
@@ -55,13 +59,13 @@ export async function POST(request: NextRequest) {
       }
     });
     
-    // Save merged cart
+    // Save merged cart - convert back to JSON for Prisma
     await prisma.userCart.upsert({
       where: { userId: user.id },
-      update: { cartItems: mergedCart },
+      update: { cartItems: mergedCart as unknown as any },
       create: {
         userId: user.id,
-        cartItems: mergedCart
+        cartItems: mergedCart as unknown as any
       }
     });
     
