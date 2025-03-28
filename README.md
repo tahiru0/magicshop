@@ -2,6 +2,7 @@
 ![Arcane Nexus](public/magic-emblem.svg)
 
 https://magicshop-omega.vercel.app/shop
+
 An immersive e-commerce experience for magical artifacts, grimoires, and potions. Built with Next.js, Prisma, and PostgreSQL.
 
 ## ✨ Features
