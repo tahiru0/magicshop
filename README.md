@@ -1,5 +1,5 @@
 # Arcane Nexus - Mystical E-Commerce Platform
-
+https://magicshop-omega.vercel.app/shop
 ![Arcane Nexus](public/magic-emblem.svg)
 
 An immersive e-commerce experience for magical artifacts, grimoires, and potions. Built with Next.js, Prisma, and PostgreSQL.
